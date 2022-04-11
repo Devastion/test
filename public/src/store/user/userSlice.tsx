@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "./userService";
 import { RootState } from "../store";
-
 export const getMovieById = createAsyncThunk(
   "movies/getbyid",
   async (movieId: string) => {
@@ -37,3 +36,6 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
+function state(state: any, arg1: { user: { auth: { token: any } } }): string {
+  throw new Error("Function not implemented.");
+}

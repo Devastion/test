@@ -14,7 +14,7 @@ const getFavorites = asyncHandler(async (req, res) => {
 const addFavorite = asyncHandler(async (req, res) => {
   const favorite = await Favorite.create({
     user: req.user._id,
-    movie_id: req.body.movie,
+    movie_id: req.body.movie_id,
   });
 
   if (favorite) {
@@ -25,16 +25,15 @@ const addFavorite = asyncHandler(async (req, res) => {
   return res.status(400).json({ message: "Already in favorites" });
 });
 
-// ! Delete /:id
+// ! Delete /delete
 // ? Delete Movie from Favorites
 const deleteFavorite = asyncHandler(async (req, res) => {
-  const favorite = await Favorite.find({
-    user: req.body.user,
+  const favorite = await Favorite.findOneAndRemove({
+    user: req.user._id,
     movie_id: req.body.movie_id,
   });
-  if (favorite) favorite.remove().res.status(200).json({ message: "removed" });
 
-  res.status(400).json({ message: "didn't remove" });
+  res.status(200).json({ favorite });
 
   // return res.status(200).json({ favorite });
 });

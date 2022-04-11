@@ -9,13 +9,37 @@ export const favorites = async (token: string) => {
   return response.data;
 };
 
-export const removeFavorite = async (token: string, id: string | number) => {
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  const response = await axios.delete(`http://localhost:5000/${id}`, config);
+export const removeFavorite = async (token: string, movie_id: number) => {
+  // const config = {
+  //   headers: { Authorization: `Bearer ${token}` },
+  //   data: {
+  //     movie_id: movie_id,
+  //   },
+  // };
+  // const response = await axios.delete(`http://localhost:5000/delete`, config);
 
-  return response.data;
+  // return response.data;
+  const res = await axios({
+    method: "DELETE",
+    url: "http://localhost:5000/delete",
+    headers: { Authorization: `Bearer ${token}` },
+    data: {
+      movie_id: movie_id,
+    },
+  });
+  return res;
+};
+
+export const addFavorite = async (token: string, movie_id: number) => {
+  const res = await axios({
+    method: "POST",
+    url: "http://localhost:5000/favorites",
+    headers: { Authorization: `Bearer ${token}` },
+    data: {
+      movie_id: movie_id,
+    },
+  });
+  return res;
 };
 
 export const getMovieById = async (movieId: string) => {
@@ -35,6 +59,8 @@ export const getMovieById = async (movieId: string) => {
 const userService = {
   favorites,
   getMovieById,
+  removeFavorite,
+  addFavorite,
 };
 
 export default userService;
