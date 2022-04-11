@@ -11,10 +11,12 @@ import {
 import { useEffect, useState } from "react";
 import { searchMovie } from "../store/movie/movieService";
 import MovieCard from "../components/MovieCard";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Search() {
   const [searchVal, setSearchVal] = useState("");
   const [moviesList, setMoviesList] = useState([]);
+  const navigate = useNavigate();
 
   const searchMovies = (e: any) => {
     e.preventDefault();

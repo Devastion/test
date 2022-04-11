@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema(
     },
     session_id: {
       type: String,
-      unique: false,
+      unique: true,
       required: [true, "Session ID is required"],
     },
   },

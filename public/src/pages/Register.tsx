@@ -29,14 +29,6 @@ export default function Register({ isLogin }: Props) {
   });
   const { name, password } = formData;
 
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
-    }
-  }, [navigate, formData, isAuthenticated]);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -44,6 +36,8 @@ export default function Register({ isLogin }: Props) {
   const onSubmit = (e: any) => {
     e.preventDefault();
     const response = dispatch(isLogin ? login(formData) : register(formData));
+    response;
+    navigate("/");
   };
 
   return (

@@ -7,6 +7,7 @@ interface Movie {
   poster_path: string;
   overview: string;
   state: "idle" | "pending" | "rejected" | "success";
+  isFavorite: boolean;
 }
 
 export const popularMovies = createAsyncThunk("movies/popular", async () => {
@@ -25,7 +26,11 @@ const initialState = {
 const moviesSlice = createSlice({
   name: "movies",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    isFavorite: (state) => {
+      state.data[1].isFavorite = true ? false : true;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(popularMovies.fulfilled, (state, action) => {
       state.data = action.payload;

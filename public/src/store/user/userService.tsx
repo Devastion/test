@@ -10,15 +10,6 @@ export const favorites = async (token: string) => {
 };
 
 export const removeFavorite = async (token: string, movie_id: number) => {
-  // const config = {
-  //   headers: { Authorization: `Bearer ${token}` },
-  //   data: {
-  //     movie_id: movie_id,
-  //   },
-  // };
-  // const response = await axios.delete(`http://localhost:5000/delete`, config);
-
-  // return response.data;
   const res = await axios({
     method: "DELETE",
     url: "http://localhost:5000/delete",
@@ -46,7 +37,7 @@ export const getMovieById = async (movieId: string) => {
   const response = await axios.get(
     `https://api.themoviedb.org/3/movie/${movieId}?api_key=baa5e920e3f221f1c46904e941e296d2&language=en-US`
   );
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+
   const { id, title, poster_path, overview } = response.data;
   return {
     id,

@@ -11,6 +11,8 @@ import { useAppSelector } from "./store/hooks";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Register from "./pages/Register";
+import { logout } from "./store/auth/authService";
+import { useEffect } from "react";
 
 export default function App() {
   const isAuth = useAppSelector((state) => state.auth.isAuthenticated);
@@ -25,11 +27,15 @@ export default function App() {
       </Tab>
     </>
   ) : (
-    " "
+    <Tab onClick={logout}>Logout</Tab>
   );
   // <Tab>
   //   <NavLink to="/profile">Profile</NavLink>
   // </Tab>
+
+  useEffect(() => {
+    ifAuth;
+  }, [logout, NavLink]);
 
   return (
     <ChakraProvider>

@@ -23,9 +23,15 @@ export const login = createAsyncThunk(
   }
 );
 
+const logout = createAsyncThunk("auth/logout", async () => {
+  await authService.logout();
+});
+
+const user = JSON.parse(localStorage.getItem("user")) || " ";
+
 const UserState = {
-  user: {},
-  isAuthenticated: false,
+  user: user || null,
+  isAuthenticated: user != " " ? true : false,
 };
 
 const authSlice = createSlice({
@@ -50,6 +56,10 @@ const authSlice = createSlice({
       .addCase(login.rejected, (state) => {
         state.isAuthenticated = false;
       });
+    builder.addCase(logout.fulfilled, (state) => {
+      state.user = " ";
+      state.isAuthenticated = false;
+    });
   },
 });
 

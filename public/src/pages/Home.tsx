@@ -22,8 +22,9 @@ export default function Home() {
   const navigate = useNavigate();
   const selector = useAppSelector((state) => state);
 
+  const token = selector.auth.user.token;
+
   const isAuth = selector.auth.isAuthenticated;
-  const { token }: any = selector.auth.user;
 
   // * User favorites
   const favoriteMovies = favorites(token);
@@ -48,11 +49,7 @@ export default function Home() {
     dispatch(popularMovies());
 
     if (selector.user.assets.length >= 0 && isAuth) dispatch(render);
-
-    if (!isAuth) {
-      navigate("/login");
-    }
-  }, []);
+  }, [navigate, dispatch]);
 
   //* Search movies
   const [searchVal, setSearchVal] = useState("");
@@ -111,6 +108,18 @@ export default function Home() {
         wrap="nowrap"
         justifyContent="flex-start"
         overflow="auto"
+        css={{
+          "&::-webkit-scrollbar": {
+            width: "4px",
+          },
+          "&::-webkit-scrollbar-track": {
+            width: "6px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#eeeee4",
+            borderRadius: "24px",
+          },
+        }}
       >
         {mapPopularMovies}
       </Flex>
@@ -122,6 +131,18 @@ export default function Home() {
         wrap="nowrap"
         justifyContent="flex-start"
         overflow="auto"
+        css={{
+          "&::-webkit-scrollbar": {
+            width: "4px",
+          },
+          "&::-webkit-scrollbar-track": {
+            width: "6px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#eeeee4",
+            borderRadius: "24px",
+          },
+        }}
       >
         {localStorage.getItem("user")
           ? mapFavMovies

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   chakra,
@@ -13,7 +13,7 @@ import {
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useAppSelector, useAppDispatch } from "../store/hooks";
+import { useAppSelector } from "../store/hooks";
 type Props = {
   src: string;
   title: string;
@@ -26,7 +26,6 @@ export default function MovieCard({ src, title, id, overview }: Props) {
   const IMG_API = `https://image.tmdb.org/t/p/w200${src}`;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const selector = useAppSelector((state) => state);
-  const { token } = selector.auth.user;
 
   const isFavorite = () => {
     return selector.user.assets.some((movie) => {
@@ -35,22 +34,17 @@ export default function MovieCard({ src, title, id, overview }: Props) {
   };
 
   const removeFav = async () => {
-    console.log(selector.user.assets);
-    console.log(id);
-    console.log(token);
-    const remove = await removeFavorite(token, id);
+    const remove = await removeFavorite(selector.auth.user.token, id);
     console.log(remove);
 
-    return remove;
+    onClose();
   };
 
   const addFav = async () => {
-    console.log(selector.user.assets);
-    console.log(id);
-    console.log(token);
-    const add = await addFavorite(token, id);
+    const add = await addFavorite(selector.auth.user.token, id);
     console.log(add);
-    return add;
+
+    onClose();
   };
 
   return (

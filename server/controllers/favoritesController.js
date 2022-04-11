@@ -17,12 +17,14 @@ const addFavorite = asyncHandler(async (req, res) => {
     movie_id: req.body.movie_id,
   });
 
-  if (favorite) {
-    return res.status(201).json({
-      message: "Success. Favorite added",
-    });
-  }
-  return res.status(400).json({ message: "Already in favorites" });
+  const duplicate = await Favorite.find({ movie_id: req.body.movie_id });
+  if (duplicate.user === req.user)
+    res.status(400).json({ message: "duplicate" });
+
+  await favorite;
+  return res.status(201).json({
+    message: "Success. Favorite added",
+  });
 });
 
 // ! Delete /delete

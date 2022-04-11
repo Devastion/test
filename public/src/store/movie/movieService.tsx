@@ -9,7 +9,7 @@ export const searchMovie = async (query: string) => {
 
 const getPopularMovies = async () => {
   const response = await axios.get(
-    "https://api.themoviedb.org/3/movie/popular?api_key=baa5e920e3f221f1c46904e941e296d2&language=en-US&page=1"
+    "https://api.themoviedb.org/3/movie/popular?api_key=baa5e920e3f221f1c46904e941e296d2&language=en-US&page=4"
   );
   return response.data.results;
 };
