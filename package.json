@@ -1,0 +1,47 @@
+{
+  "name": "fullstack-essential",
+  "version": "1.0.0",
+  "description": "After the react and then typescript boilerplate, here we come with fullstack boilerplate. :) ",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run public\"",
+    "server": "nodemon server/index.js",
+    "public": "npm run development --prefix public"
+  },
+  "ntl": {
+    "descriptions": {
+      "start": "Run both server and public",
+      "server": "Run server with nodemon @ :5000",
+      "public": "Run the frontend @ :3000"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devastion/fullstack-essential.git"
+  },
+  "author": "Dimitar Banev <banev_dimitar@mail.com> (https://devastion.net/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devastion/fullstack-essential/issues"
+  },
+  "homepage": "https://github.com/devastion/fullstack-essential#readme",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "express": "^4.17.3",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.10"
+  },
+  "devDependencies": {
+    "concurrently": "^7.1.0",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.15",
+    "ntl": "^5.1.0"
+  }
+}
