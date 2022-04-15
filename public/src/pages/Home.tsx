@@ -27,11 +27,15 @@ export default function Home() {
   const isAuth = selector.auth.isAuthenticated;
 
   // * User favorites
-  const favoriteMovies = favorites(token);
 
   const render = async () => {
     const response = await favorites(token);
-    response.map((movie: any) => dispatch(getMovieById(movie.movie_id)));
+
+    response.map(
+      async (movie: any) => await dispatch(getMovieById(movie.movie_id))
+    );
+
+    return response;
   };
 
   const moviesSelector = selector.user.assets;
@@ -47,9 +51,8 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(popularMovies());
-
-    if (selector.user.assets.length >= 0 && isAuth) dispatch(render);
-  }, [navigate, dispatch]);
+    if (moviesSelector.length === 0) render();
+  }, [navigate, isAuth]);
 
   //* Search movies
   const [searchVal, setSearchVal] = useState("");
@@ -144,9 +147,7 @@ export default function Home() {
           },
         }}
       >
-        {localStorage.getItem("user")
-          ? mapFavMovies
-          : "Please login to see favorites"}
+        {isAuth ? mapFavMovies : "Please login to see favorites"}
       </Flex>
     </>
   );

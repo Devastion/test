@@ -16,7 +16,7 @@ const login = async (userData: object) => {
   return response.data;
 };
 
-export const logout = async () => {
+export const logout = () => {
   localStorage.removeItem("user");
 };
 

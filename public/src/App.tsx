@@ -29,6 +29,7 @@ export default function App() {
   ) : (
     <Tab onClick={logout}>Logout</Tab>
   );
+
   // <Tab>
   //   <NavLink to="/profile">Profile</NavLink>
   // </Tab>

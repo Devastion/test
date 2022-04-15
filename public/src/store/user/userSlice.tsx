@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import userService from "./userService";
-import { RootState } from "../store";
+
 export const getMovieById = createAsyncThunk(
-  "movies/getbyid",
+  "movies/getById",
   async (movieId: string) => {
     return await userService.getMovieById(movieId);
   }
@@ -15,12 +15,14 @@ interface Movie {
   overview: string;
 }
 
+const initialState = {
+  assets: [] as Movie[],
+  status: "loading",
+};
+
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    assets: [] as Movie[],
-    status: "loading",
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -36,6 +38,3 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-function state(state: any, arg1: { user: { auth: { token: any } } }): string {
-  throw new Error("Function not implemented.");
-}
