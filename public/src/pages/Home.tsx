@@ -52,7 +52,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(popularMovies());
     if (moviesSelector.length === 0) render();
-  }, [navigate, isAuth]);
+  }, []);
 
   //* Search movies
   const [searchVal, setSearchVal] = useState("");

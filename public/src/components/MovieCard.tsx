@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   chakra,
@@ -27,7 +27,7 @@ export default function MovieCard({ src, title, id, overview }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const selector = useAppSelector((state) => state);
 
-  const isFavorite = () => {
+  let isFavorite = () => {
     return selector.user.assets.some((movie) => {
       return movie.title === title;
     });
@@ -43,7 +43,6 @@ export default function MovieCard({ src, title, id, overview }: Props) {
   const addFav = async () => {
     const add = await addFavorite(selector.auth.user.token, id);
     console.log(add);
-
     onClose();
   };
 
